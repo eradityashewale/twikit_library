@@ -19,13 +19,23 @@ async def main():
     client = Client(language='en-US')
 
     # Await login since it's an async function
-    await client.login(
-        auth_info_1=username,
-        auth_info_2=email,
-        password=password
-    )
+    # await client.login(
+    #     auth_info_1=username,
+    #     auth_info_2=email,
+    #     password=password
+    # )
     # Save cookies after logging in
-    client.save_cookies('cookies.json')
+    # client.save_cookies('cookies.json')
+    client.load_cookies('cookies.json')
+
+    tweets = await client.search_tweet(QUERY, product = 'TOP')
+
+    for tweet in tweets:
+        print(vars(tweet))
+        break
+
+    
+
 
 # Run the async main function
 asyncio.run(main())
